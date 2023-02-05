@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class GameManager : MonoBehaviour
     public DropMagicScript dms;
     public GameUI gUI;
 
-    public bool bindMovement;
+    public bool gameplayActive;
 
     public int health = 3;
     public int score = 0;
@@ -16,9 +18,21 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      bindMovement = false;
+
+    }
+
+    public void RestartLevel(){
+      gameplayActive = true;
       health = 3;
       score = 0;
+    }
+
+    public void LoadMenu(){
+      SceneManager.LoadScene("MenuScene");
+    }
+
+    public void LoadLevel(){
+      SceneManager.LoadScene("LevelScene");
     }
 
     // Update is called once per frame
@@ -31,17 +45,18 @@ public class GameManager : MonoBehaviour
       health --;
 
       if (health == 2){
-        gUI.Life1.SetActive(false);
+        gUI.Life1.SetBool("LifeLoss", true);
       } else if (health == 1){
-        gUI.Life2.SetActive(false);
+        gUI.Life2.SetBool("LifeLoss", true);
       }  else if (health == 0){
-        gUI.Life3.SetActive(false);
+        gUI.Life3.SetBool("LifeLoss", true);
         GameOver();
       }
     }
 
     void GameOver(){
-      bindMovement = true;
+      gameplayActive = false;
+      gUI.GameOverGO.SetActive(false);
     }
 
     public void AddPoints(){

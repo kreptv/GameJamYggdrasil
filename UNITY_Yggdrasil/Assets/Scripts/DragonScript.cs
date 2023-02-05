@@ -17,6 +17,7 @@ public class DragonScript : MonoBehaviour
 
     void Update()
     {
+        if (!gm.gameplayActive){return;}
         // Move the dragon up the screen
         transform.position += Vector3.up * speed * Time.deltaTime;
 
@@ -25,6 +26,7 @@ public class DragonScript : MonoBehaviour
     }
 
   void OnTriggerEnter2D(Collider2D collision) {
+      if (!gm.gameplayActive){return;}
 
     if (collision.gameObject.tag == "Root"){
         Destroy(collision.gameObject);

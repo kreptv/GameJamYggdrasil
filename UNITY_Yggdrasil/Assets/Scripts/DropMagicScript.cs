@@ -23,6 +23,7 @@ public class DropMagicScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gm.gameplayActive){return;}
       if (Input.GetKey(KeyCode.Space) && (cooldown == false)){
           gm.pms.animator.SetBool("Throwing", true);
           GameObject spawnMagic = Instantiate(magic, gm.pms.gameObject.transform.position, gm.pms.gameObject.transform.rotation);
@@ -33,6 +34,7 @@ public class DropMagicScript : MonoBehaviour
     }
 
     void LateUpdate(){
+        if (!gm.gameplayActive){return;}
       gm.pms.animator.SetBool("Throwing", false);
     }
 }

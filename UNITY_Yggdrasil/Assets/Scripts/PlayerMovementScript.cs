@@ -23,7 +23,7 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      if (gm.bindMovement){return;}
+      if (!gm.gameplayActive){return;}
 
 
       if (Input.GetAxis("Horizontal") > 0.1 ){
